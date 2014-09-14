@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <title>Join a Game</title>
+        <link href='http://fonts.googleapis.com/css?family=Sacramento' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+        <link rel='stylesheet' type='text/css' href='/static/telephonegame.css'>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    </head>
+    <body> 
+        <h1>{{ game.game_name }}</h1>
+        <p>Players in {{ game.game_name }}:</p>
+        <ol id='current-players'>
+            {% for player in game.players %}
+                {% if player == game.game_creator %}
+                    <li>Creator: {{ player }}</li>
+            {% else %}
+                    <li>{{ player }}</li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+        <!-- Game creator's Create Game Form -->
+        {% if user == game.game_creator %}
+            <form action = 'start'>
+                <input type="hidden" name="id" value="{{ game.players.index(user) }}" >
+                <input type="hidden" name="game_name" value="{{ game.game_name }}" >
+                <button id="startButton">start!</button>
+            </form>
+        <!-- Other players' template (waiting message) -->
+        {% else %}
+            <p>Waiting for {{ game.game_creator }} to start the game...</p>
+        {% endif %}
+        <form action='/'>
+            <button>back to home</button>
+        </form>
+        <script>
+            function CheckPlayers() {
+                $.post("new-players", { "player_count" : $('li').length, 'game_name' : '{{ game.game_name }}' }, function( data ) {
+                    if (data['more-players'] == 'true') {
+                        $.get("add-players", { 'game_name' : '{{ game.game_name }}' }, function( data ) {
+                            var players = data['all-players']
+                            $('#current-players').empty();
+                            for (var i=0; i<players.length; i++) {
+                                if (i==0) {
+                                    $('#current-players').append('<li>Creator: ' + players[i] + '</li>');
+                                }
+                                else {
+                                    $('#current-players').append('<li>' + players[i] + '</li>');
+                                }
+                            }
+                        }); 
+                    }
+                });
+            }
+
+            function changeStatus() {
+                $.post("start", { 'game_name' : '{{ game.game_name }}' }, console.log("Changed Status"));
+            }
+
+            function CheckStart() {
+                 $.post( "started", { 'game_name' : '{{ game.game_name }}' }, function( data ) {
+                    if (data['ready'] == 'true') {
+                        window.location = ('/game?id={{ game.players.index(user) }}&game_name={{ game.game_name }}');
+                    }
+                });
+            }
+
+            function Main() {
+                setInterval(CheckStart, 1000);
+                setInterval(CheckPlayers, 1000);
+                $('#startButton').click(changeStatus);
+            }
+
+            $(document).ready(Main);
+        </script>
+        <br>
+    <img src= /static/lime.png>
+    </body>
+</html>

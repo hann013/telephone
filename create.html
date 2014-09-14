@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Creating Game</title>
+        <link href='http://fonts.googleapis.com/css?family=Sacramento' rel='stylesheet' type='text/css'>
+        <link rel='stylesheet' type='text/css' href='/static/telephonegame.css'>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	</head>
+	<body>   
+ 		<h1>loading...</h1>
+ 		<script type="text/javascript">
+ 			function Main() {
+                setTimeout(function() {window.location = ('/wait?game_name={{game.game_name}}&user={{game.game_creator}}');}, 1000)
+            }
+
+            $(document).ready(Main);
+ 		</script>
+	</body>
+</html>
+

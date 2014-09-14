@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Sacramento' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' type='text/css' href='/static/homepage.css'>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function createDisplayInfo(buttonName){
+            function displayInfo(){
+              $('#text_'+buttonName).fadeIn()
+            }
+            return displayInfo
+        }
+
+        function hideInfo(){
+            $('.img').fadeOut()
+            $('.text').fadeOut() 
+        }
+        
+        function Main(){
+            $('#img_play').hover(createDisplayInfo("play"))
+            $('#img_play').mouseout(hideInfo)
+            $('#img_instructions').hover(createDisplayInfo("instructions"))
+            $('#img_instructions').mouseout(hideInfo)
+            $('#img_aboutus').hover(createDisplayInfo("aboutus"))
+            $('#img_aboutus').mouseout(hideInfo)
+            $('.text').hide()
+        }
+
+        $(document).ready(Main)
+    </script>
+
+    <title>Telephone</title>
+  </head>
+  <body> 
+    <h1>telephone</h1>
+<!-- Clickable Telephone Pictures -->
+    <table>
+        <tr>
+            <td class='image'><a href="/instructions"><img src= "static/green.png" class="button" id="img_instructions" alt="Instructions button"></a></td>
+            <td class='image'><a href="/login"><img src= "static/blue.png" class="button" id="img_play" alt="Play Telephone button"></a></td>
+            <td class='image'><a href="aboutus"><img src= "static/orange.png" class="button" id="img_aboutus" alt="About Us button"></a></td>
+        </tr>
+            <td><div class='text' id="text_instructions">how to play</div></td>
+            <td><div class='text' id="text_play">play telephone</div></td>
+            <td><div class='text' id="text_aboutus">about us</div></td>
+        </tr>
+    </table>
+  </body>
+</html>

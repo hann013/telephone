@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Sacramento' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='/static/instructions.css' rel='stylesheet' type="text/css">
+    <title>How to Play</title>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function createDisplayInfo(buttonName){
+            function displayInfo(){
+              $('#text_'+buttonName).fadeIn()
+            }
+            return displayInfo
+        }
+
+        function hideInfo(){
+            $('.img').fadeOut()
+            $('.text').fadeOut() 
+        }
+
+        function Main(){
+            $('#img_home').hover(createDisplayInfo("home"))
+            $('#img_home').mouseout(hideInfo)
+            $('#img_play').hover(createDisplayInfo("play"))
+            $('#img_play').mouseout(hideInfo)
+            $('.text').hide()
+        }
+
+        $(document).ready(Main)
+    </script>
+  </head> 
+  <body>
+    <h2>how to play</h2>
+    <div>
+      <p>Creating/Joining Games</p>
+      <ol>
+        <li class='instructions'>The player who wants to send the first message will name and create a game.</li>
+        <li class='instructions'>Other players can join that game up until the game creator starts the game.</li>
+        <li class='instructions'>Players will play in the order that they join the game.</li>
+      </ol>
+
+      <p>Gameplay</p>
+      <ol>
+        <li class='instructions'>The first player will decide on a message, type it out, and send it.</li>
+        <li class='instructions'>When every other player receives the message, a &quot;show message&quot; button will appear. Once clicked, the message will be displayed for a few seconds.</li>
+        <li class='instructions'>Then, a textbox will appear and you will need to write what you saw and pass on the message.</li>
+        <li class='instructions'>At the end, the first and final messages will be compared to determine if your team succeeded or failed!</li>
+       </ol>
+      <table>
+          <tr>
+              <td class='image'><a href="/"><img src= "static/yellow.png" class="button" id="img_home" alt="Home button"></a></td>
+              <td class='image'><a href="/login"><img src= "static/blue.png" class="button" id="img_play" alt="Play Telephone button"></a></td>
+          </tr>
+          <tr>
+              <td><div class='text' id="text_home">back to homepage</div></td>
+              <td><div class='text' id="text_play">play!</div></td>
+          </tr>
+      </table>
+    </div>
+</body>
+    
+</html>

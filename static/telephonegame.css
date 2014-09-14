@@ -1,0 +1,95 @@
+ body{
+    background-color: white;
+    color: rgba(130,130,130, 1);
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 24px;
+}
+
+button{
+    background-image: url("button.png");
+    opacity: 0.8;
+    cursor: pointer;
+    width: 150px;
+    height: 75px;
+    border: none;
+    background-color: white;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 70%;
+}
+
+button:hover{
+    background-image: url("button-pressed.png");
+}
+
+#again{
+    background-image: none;
+    width:140px;
+    height:50px;
+}
+
+img{
+    width:290px;
+    height:220px;
+    margin:auto;
+}
+
+td{
+    height:350px;
+    width:300px;
+}
+
+h1{
+    font-family: 'Sacramento', cursive;
+    font-size: 150px;
+    margin-top: 0; 
+    color: rgba(198,198,198,.85);
+    margin-bottom: 1%;
+
+}
+
+h2{
+    font-family: 'Sacramento', cursive;
+    font-size: 100px;
+    margin-top: 0; 
+    margin-bottom: 0;
+    color: #FF99CC;
+}
+
+.gameName{
+    font-size: 65px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color:#99EBFF;
+}
+
+ol{
+    list-style-position: inside;
+}
+
+.instructions {
+    text-align: left;
+    font-size: 24px;
+}
+
+h6 {
+    margin-bottom: 1%;
+    margin-top: 1%;
+
+}
+
+#orangephone {
+    height:'30px'; 
+    width:'50px';
+}
+
+#greentelephone {
+    margin-right: 0px;
+    margin-left: 600px;
+}
+
+#endgame {
+    background-image: url('/static/endpage.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+}

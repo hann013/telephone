@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <title>Telephone Game</title>
+        <link href='http://fonts.googleapis.com/css?family=Sacramento' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+        <link rel='stylesheet' type='text/css' href='/static/telephonegame.css'>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <style>
+            .previous_message{
+                -webkit-user-select: none;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>telephone</h1>
+        <h2 class = "gameName">{{ game.game_name }}</h2>
+        <p id="receive_button"></p>
+        <p class="waiting">Waiting for the message to be sent to you!</p>
+        <p class="previous_message"></p>
+        <p class="next_message"> Enter the message you want to pass along below: </p>
+        <form class="next_message" action="store-msg" method="get">
+            <textarea rows="5" cols="45" class="next_message" name="message" placeholder="Enter Message Here"></textarea>
+            <input class="next_message" type="hidden" name="id" value="{{ nextID }}">
+            <input class="next_message" type="hidden" name="game_name" value="{{ game.game_name }}">
+            <p><button class="next_message">submit message</button></p>
+        </form>
+        <img src="/static/orangephone.png" id="orangephone" align="right">
+        <script>
+            var message_received = false
+            var check = setInterval(CheckMessage, 1000)
+
+
+            function Main() {
+                setInterval(StopMessage, 100);
+                check;
+                $(".waiting").hide();
+                if ({{ ID }} != 0) {
+                    $(".waiting").show();
+                    $(".previous_message").hide();
+                    $(".next_message").hide();
+                }
+            }
+            
+            function ShowMessage() {
+                $(".previous_message").show();
+                $("#receive_button").hide();
+                var ID = {{ ID }};
+                var messages = {{ game.msg }};
+                console.log(messages);
+                var index = ({{ ID }} - 1);
+                var Message = messages[index];
+                console.log(Message);
+                Message = String(Message);
+                // Message = "\""+Message+"\"";
+                var msgWords = Message.split(" ");
+                var timeExposed = (msgWords.length);
+                timeExposed = parseInt(timeExposed);
+                timeExposed = (timeExposed*1000);
+                setTimeout(function() {$(".previous_message").hide(); $(".show_message").hide(); $(".next_message").show(); }, timeExposed);
+                console.log(Message);
+                console.log(msgWords);
+                console.log(timeExposed);
+            }
+
+            function CheckMessage() {
+                $.post("receive-msg", { 'game_name' : '{{ game.game_name }}', 'id' : '{{ ID }}' }, function( data ) {
+                    if (data['message-received'] == 'true') {
+                        message_received = true;
+                        var message = data['message']
+                        $(".waiting").hide();
+                        $('#receive_button').append('<button class="show_message">show message</button>');
+                        $(".show_message").click(ShowMessage);
+                        $('.previous_message').append(message);
+                    }; 
+                });
+            }
+
+            function StopMessage() {
+                if (message_received == true) {
+                    clearInterval(check);
+                }
+            }
+
+            $(document).ready(Main);
+        </script>
+    </body>
+</html>

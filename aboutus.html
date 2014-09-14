@@ -1,0 +1,132 @@
+
+    <!DOCTYPE html>
+<html>
+  <head>
+    <title>About Us</title>
+    <link href='http://fonts.googleapis.com/css?family=Sacramento' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,700,400italic' rel='stylesheet' type='text/css'>    
+    <style>
+        body{
+            background-color: white;
+            color: #055EA3;
+            font-size: 2em;
+        }
+        img{
+            width:150px;
+            height:150px;
+            border-radius: 100%;
+        }
+        table{
+            margin:auto;
+        }
+        body{
+            text-align: center;
+            font-family: 'Josefin Sans', sans-serif;
+        }
+        td img{
+            height:200px;
+            width:200px;
+        }
+        td{
+            font-size: .5em;
+        }
+        h1{
+            font-family: 'Sacramento', cursive;
+            font-size: 2em;
+
+        }
+        p{
+
+        }
+        #footer{
+            width:100%;
+            background: rgba(189, 189, 189, .5);
+            font-size:.6em;
+        }
+        #description{
+            font-size: .7em;
+        }
+
+    </style>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script type="text/javascript" >
+        
+        function createDisplayInfo(studentName){
+            function displayInfo(){
+              $('#name_'+studentName).fadeIn()
+              $('#role_'+studentName).fadeIn()
+              $('#uni_'+studentName).fadeIn()
+            }
+            return displayInfo
+        }
+
+        function createDisplayText(buttonName) {
+            function displayText() {
+                $('#text_'+buttonName).fadeIn()
+            }
+            return displayText
+        }
+
+        function hideInfo(){
+              $('.name').fadeOut()
+              $('.role').fadeOut() 
+              $('.logo').fadeOut()
+              $('.img').fadeOut()
+              $('.text').fadeOut()
+              $('.uni').fadeOut()
+            }
+
+        function hideSpefInfo(id){
+            $('#'+id).fadeOut()
+        }
+        
+        function Main(){
+            $('#display_Emmi').hover(createDisplayInfo("Emmi"))
+            $('#display_Emmi').mouseout(hideInfo)
+            $('#display_Hannah').hover(createDisplayInfo("Hannah"))
+            $('#display_Hannah').mouseout(hideInfo)
+            $('#display_Kristen').hover(createDisplayInfo("Kristen"))
+            $('#display_Kristen').mouseout(hideInfo)
+            $('#img_home').hover(createDisplayText("home"))
+            $('#img_home').mouseout(hideInfo)
+            $('#cssi_home').hover(createDisplayText("CSSI"))
+            $('#cssi_home').mouseout(hideInfo)
+            $('.uni').hide()
+            $('.name').hide()
+            $('.role').hide()
+            $('.text').hide()
+        }
+        $(document).ready(Main)
+        
+    </script> 
+  </head>
+  <body>
+    <h1>about us</h1>   
+  </head>
+  <body>
+    <table>
+    <tr><td><div class ='name' id = 'name_Hannah'>Hannah Zhang</div></td>
+        <td><div class ='name' id = 'name_Emmi'>Emilia Russo</div></td>
+        <td><div class ='name' id = 'name_Kristen'>Kristen Gee</div></td></tr>
+
+        <tr><td><div class='uni' id = 'uni_Hannah'>University of Waterloo</div><td><div class='uni' id = 'uni_Emmi'>University of Chicago</div><td><div class='uni' id = 'uni_Kristen'>University of Pennsylvania</div></tr>
+
+    <tr><td><img class="display" id = "display_Hannah" alt src="static/Hannah.jpg" /></td><td><img class="display" id = "display_Emmi" alt src="static/Emmi.jpg" /></td><td><img class="display" id = "display_Kristen" alt src="static/Kristen.jpg" /></td>
+
+    
+
+    <tr><td><div class='role' id = 'role_Hannah'><em>Front-End Development, Design</em></div><td><div class='role' id = 'role_Emmi'><em>Back-End Development, Design</em></div><td><div class='role' id = 'role_Kristen'><em>Graphics, Design, Deployment Czar</em></div></tr>
+
+    </table>   
+
+    <br><br><br><div id="description">We made the game <em>Telephone</em> for our final project at Google CSSI. We used the skills we learned in the first two weeks at CSSI such as HTML/CSS, Javascript, Python, and Google AppEngine to create this project. </div>
+<!-- 
+        <div class='image'><a href="/"><img src= "static/yellow.png" class="button" id="img_home" alt="Home button"></a></div>
+        <div class='text' id="text_home">back to homepage</div>
+        <br>
+
+        <div class='image'><a href="http://www.google.com/edu/programs/computer-science-summer-institute-cssi/"><img src="/static/cssilogo.png" class="button" id="cssi_home" alt="CSSI button"/></a><p class="text">learn more about CSSI</p></div> -->
+
+  </body>
+</html>

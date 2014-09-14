@@ -1,0 +1,15 @@
+h1{
+    font-family: 'Sacramento', cursive;
+    font-size: 150px;
+    margin-top: 2%; 
+    margin-bottom: 2%;
+    text-align: center;
+    color: rgb(130,130,130, 1);
+}
+
+body {
+    background-image: url('/static/endpage.png');
+    background-size: 80px 60px;
+    background-repeat: no-repeat;
+}
+

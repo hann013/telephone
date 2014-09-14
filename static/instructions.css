@@ -1,0 +1,51 @@
+ body{
+    background-color: white;
+    color: rgba(130,130,130, 0.8);
+    font-size: 1.50em;
+    font-family: 'Josefin Sans', sans-serif;
+    margin: auto;
+}
+
+img {
+    width:200px;
+    height:160px;
+    margin: auto;
+    position: absolute;
+}
+
+h2 {
+    font-family: 'Sacramento', cursive;
+    font-size: 100px;
+    margin-top: 0; 
+    margin-bottom: 0;
+    color: rgba(108, 240, 208, 0.8);
+    text-align: center;
+}
+
+ol {
+    text-align: left;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 24px;
+    margin-bottom: 0;
+}
+
+table {
+    margin: auto;
+}
+
+td{
+    height:180px;
+    width:220px;
+    margin: auto;
+    text-align: center;
+    color: rgba(108, 240, 208, 1);
+}
+
+p{
+    font-weight: 700;
+    color: rgba(108, 240, 208, 1);
+}
+
+div{
+    margin: 5%;
+}

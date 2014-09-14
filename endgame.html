@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel='stylesheet' type='text/css' href='/static/telephonegame.css'>
+		<link href='http://fonts.googleapis.com/css?family=Sacramento' rel='stylesheet' type='text/css'>
+    	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,700,400italic' rel='stylesheet' type='text/css'>  
+	</head>
+	<body id="endgame">
+		<h1> {{ game_result }} </h1>
+		{% if game_result == "success" %}
+			<title>Success!</title>
+			<p>Congrats, you passed the telephone message successfully!</p>
+		{% else %}
+			<title>Broken Telephone!</title>
+			<p>You broke the telephone... Shame on you.</p>
+		{% endif %}
+		<p>List of messages:</p>
+		<ol>
+			{% for i in range(0, number_of_msgs) %}
+				<li>{{ game.players[i] }} said, "{{ game.msg[i] }}"</li>
+			{% endfor %}
+		</ol>
+		<form action='/'>
+            <button type='submit' id="again">play again</button>
+        </form>
+	</body>
+</html>

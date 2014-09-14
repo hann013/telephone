@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+    <title>Telephone!</title>  
+    <link href='http://fonts.googleapis.com/css?family=Sacramento' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' type='text/css' href='/static/telephonegame.css'>  
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  </head>
+  <body> 
+    <!-- Player selects create new game -->
+    {% if user and choice == 'new-game' %}
+        <h1 class="login">create new game</h1>
+        <p>Hello {{ user }}!</p>
+        <form action='create'>
+            <p>Enter game name: <input type='text' name='game_name'></p>
+            <input type="hidden" name='game_creator' value="{{ user }}">
+            <button type='submit'>create game</button>
+        </form>
+        <form action='/'>
+            <button>back to home</button>
+        </form>
+    <!-- Player selects join existing game -->
+    {% elif user and choice == 'existing-game' %}
+        <h1 class="login">join existing game</h1>
+        <p>Hello {{ user }}!</p>
+        <p>Current games:</p>
+        <form action='wait'>
+            <ol id="current_games">
+ 		         {% for game in games %}
+                    {% if game.started == False %}
+                        <li>{{ game.game_name }} by {{ game.game_creator }} <button type="submit" name="game_name" value="{{ game.game_name }}">join game</button></li>
+                    {% endif %}
+                {% endfor %}
+            </ol>
+	    <input type="hidden" name='user' value="{{ user }}">
+        </form>
+        <form action='/'>
+            <button type='submit'>back to home</button>
+        </form>
+    <!-- Player doesn't enter name -->
+    {% elif not user and choice %}
+        <h1 class="login">play</h1>
+        <form action="login">
+            <p>What's your name? <input type='text' name='user'><p>
+            <button type="submit" name="choice" value="new-game">start new game</button>
+            <button type="submit" name="choice" value="existing-game">join existing game</button>
+        </form>
+            <p>Please enter your name!</p>
+    <!-- First page -->
+    {% else %}
+        <h1 class="login">play</h1>
+        <form action="login">
+            <p>What's your name? <input type='text' name='user'><p>
+            <button type="submit" name="choice" value="new-game">start new game</button>
+            <button type="submit" name="choice" value="existing-game">join existing game</button>
+        </form>
+    {% endif %}
+    
+    <p> 
+    <img src="/static/bluephone.png" id="bluephone" align="left">
+
+    <a href="/"> <img src="/static/lime.png" id="greentelephone" aligh="right"> </a> 
+    </p>
+
+    <script>
+        function CheckGames() {
+            $.post("new-games", { "game_count" : $('li').length, 'choice' : '{{ choice }}' }, function( data ) {
+                if (data['more-games'] == 'true') {
+                    $.get("add-games", function( data ) {
+                        var games = data['all-games']
+                        $('#current_games').empty();
+                        for (var i=0; i<games.length; i++) {
+                            $('#current_games').append('<li>' + games[i]['name'] + ' by ' + games[i]['creator'] + ' <button type="submit" name="game_name" value="' + games[i]['name'] + '">join game</button></li>');
+                        }
+                    }); 
+                }
+            });
+        }
+
+        function Main() {
+            setInterval(CheckGames, 1000);
+        }
+
+        $(document).ready(Main);
+    </script>
+  </body>
+</html>
